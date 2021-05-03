@@ -15,7 +15,6 @@ header-includes:
 - \usepackage{graphicx}
 ---
 
-
 ```{r setup, include=FALSE, cache=F, message=F, warning=F, results="hide"}
 knitr::opts_chunk$set(
   cache = FALSE, echo = FALSE, message = FALSE, warning = FALSE
@@ -79,12 +78,17 @@ cat(paste(latex_tab, collapse = "\n"))
 ```
 
 
-### Life Expectancy by National Income
+### Life Expectancy in the World 
 
-```{r Scatter}
-fig_scatter
+```{r World Map}
+fig_world
 ```
 
+### Life Expectancy by National Income
+
+```{r Scatter, results="asis"}
+fig_scatter
+```
 
 ### No presentation without correlation table...
 
@@ -108,10 +112,40 @@ cat(paste(latex_tab, collapse = "\n"))
 ```
 
 
-### ... and regression table
+### ... and regression table for all countries
 
 ``` {r RegTable, results="asis"}
 tab <- tab_regression$table
+tab[12] <- paste(
+  "\\\\[-1.8ex] & \\multicolumn{4}{c}{", smp_def$label[9], "} \\\\"
+)
+esc_var_names <- str_replace_all(smp_def$var_name, fixed ("_"), "\\_")
+reg_names <- tibble(
+  var_name = esc_var_names[c(10, 8)],
+  label = smp_def$label[c(10, 8)]
+)
+for (i in c(15, 18)) {
+  pos <- (i-12)/3
+  tab[i] <- str_replace(
+    tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
+  )
+}
+
+latex_tab <- c(
+  "\\begin{center}",
+  "\\resizebox*{!}{0.8\\textheight}{",
+  "\\begin{tabular}{lcccc}",
+  tab[8:33],
+  "\\end{tabular}}",
+  "\\end{center}"
+)
+cat(paste(latex_tab, collapse = "\n"))
+```
+
+### ... and regression table for only above middle income
+
+``` {r RegTable_high, results="asis"}
+tab <- tab_regression_high$table
 tab[12] <- paste(
   "\\\\[-1.8ex] & \\multicolumn{4}{c}{", smp_def$label[9], "} \\\\"
 )

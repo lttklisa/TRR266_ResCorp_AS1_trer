@@ -87,6 +87,11 @@ To verify that this association is robust to including controls and general cros
 
 The Preston curve is alive and well. While being simplistic, the presented analysis contains all main building blocks of a typical empirical study based on observational data: data collection, sample specification, variable construction, exploratory as well as confirmatory analysis and result presentation. Have fun using this template for your own projects and consider contributing to its development, e.g., by providing code for Software packages besides R.
 
+```{r World Map, echo = FALSE, fig.align="center", fig.cap="\\label{fig:worldmap}Life Expectancy in the World"}
+fig_world
+```
+
+
 ```{r Scatter, echo = FALSE, fig.align="center", fig.cap="\\label{fig:scatter}National Income and Life Expectancy"}
 fig_scatter
 ```
@@ -180,6 +185,36 @@ latex_tab <- c(
 )
 cat(paste(latex_tab, collapse = "\n"))
 ```
+
+``` {r RegTable_high, results="asis"}
+tab <- tab_regression_high$table
+tab[12] <- paste(
+  "\\\\[-1.8ex] & \\multicolumn{4}{c}{", smp_def$label[9], "} \\\\"
+)
+esc_var_names <- str_replace_all(smp_def$var_name, fixed ("_"), "\\_")
+reg_names <- tibble(
+  var_name = esc_var_names[c(10, 8)],
+  label = smp_def$label[c(10, 8)]
+)
+for (i in c(15, 18)) {
+  pos <- (i-12)/3
+  tab[i] <- str_replace(
+    tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
+  )
+}
+latex_tab <- c(
+  "\\begin{table}[!htbp]",  
+  "\\caption{\\label{tab:reg}Regressions}",
+  "\\centering",
+  "\\begin{tabular}{lcccc}",
+  tab[8:33],
+  "\\end{tabular}",
+  "\\end{table}"
+)
+cat(paste(latex_tab, collapse = "\n"))
+```
+
+
 
 \pagebreak
 

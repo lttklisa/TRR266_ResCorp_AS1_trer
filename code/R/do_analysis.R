@@ -4,6 +4,26 @@ library(ExPanDaR)
 
 load("data/generated/sample.rda")
 
+library(ggmap)
+library(maps)
+
+world_map <- map_data("world")
+head(world_map)
+names(world_map)[names(world_map)=="region"] <- "country"
+world_map$country[world_map$country=="USA"] <- "United States"
+world_map$country[world_map$country=="UK"] <- "United Kingdom"
+world_map$country[world_map$country=="Russia"] <- "Russian Federation"
+world_map$country[world_map$country=="Democratic Republic of the Congo"] <- "Congo, Dem. Rep."
+world_map$country[world_map$country=="Republic of Congo"] <- "Rep of Congo"
+world_map$country[world_map$country=="Ireland"] <- "Ireland-Rep"
+world_map$country[world_map$country=="Hong Kong SAR, China"] <- "Hong Kong"
+world_map$country[world_map$country=="United Arab Emirates"] <- "Utd Arab Em"
+world_map$country[world_map$country=="Slovakia"] <- "Slovak Rep"
+card <- dplyr::left_join(world_map, smp, by.x="country")
+card <- card[order(card$group, card$order),]
+fig_world <- ggplot(card, aes(x=long, y=lat, group=group)) + geom_polygon(aes(fill=life_expectancy), color="black") + scale_fill_gradient(low="royalblue1", high="brown3", na.value="grey80")
+
+
 fig_scatter <- ggplot(
   smp, aes(x = ln_gdp_capita, y = life_expectancy, color = region)
 ) +
@@ -26,6 +46,22 @@ tab_corr <- prepare_correlation_table(
 
 tab_regression <-  prepare_regression_table(
   smp,
+  dvs = rep("life_expectancy", 4),
+  idvs = list(
+    c("ln_gdp_capita"),
+    c("ln_gdp_capita", "unemployment"),
+    c("ln_gdp_capita", "unemployment"),
+    c("ln_gdp_capita", "unemployment")
+  ),
+  feffects = list("", "", "year", c("country", "year")),
+  cluster = list("", "",  "year", c("country", "year")),
+  format = "latex"
+)
+
+
+smp_high <- smp[smp$income_level=="High income" | smp$income_level=="Upper middle income",]
+tab_regression_high <-  prepare_regression_table(
+  smp_high,
   dvs = rep("life_expectancy", 4),
   idvs = list(
     c("ln_gdp_capita"),
