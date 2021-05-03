@@ -15,6 +15,8 @@ header-includes:
 - \usepackage{graphicx}
 ---
 
+Hallo, das ist ein Test. Tschüss.
+
 ```{r setup, include=FALSE, cache=F, message=F, warning=F, results="hide"}
 knitr::opts_chunk$set(
   cache = FALSE, echo = FALSE, message = FALSE, warning = FALSE
