@@ -42,21 +42,21 @@ pull_worldbank_data <- function(vars) {
     "Calendar year of observation"
   )
   wb_data_def$type = c(rep("cs_id", 3), rep("factor",  2), "ts_id",
-                       rep("numeric", 3))
+                       rep("numeric", 4))
   return(list(wb_data, wb_data_def))
 }
 
 message(sprintf("Pulling World Bank data: %s", Sys.time()))
 
-vars <- c("SP.DYN.LE00.IN", "NY.GDP.PCAP.KD", "SL.UEM.TOTL.ZS")
-var_names <- c("gdp_capita", "unemployment", "life_expectancy")
+vars <- c("SP.DYN.LE00.IN", "NY.GDP.PCAP.KD", "SL.UEM.TOTL.ZS", "SH.XPD.CHEX.PC.CD") #what variables need to be downloaded
+var_names <- c("gdp_capita", "health_exp_capita","unemployment", "life_expectancy")
 
 wb_list <- pull_worldbank_data(vars)
 worldbank_panel <- wb_list[[1]]
 worldbank_def <- wb_list[[2]]
 
-colnames(worldbank_panel)[c(7:9)] <- var_names
-worldbank_def$var_name[c(7:9)] <- var_names
+colnames(worldbank_panel)[c(7:10)] <- var_names
+worldbank_def$var_name[c(7:10)] <- var_names
 
 save(worldbank_panel, worldbank_def, file = "data/pulled/worldbank.rda")
 

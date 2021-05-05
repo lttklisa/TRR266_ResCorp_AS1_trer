@@ -15,8 +15,6 @@ header-includes:
 - \usepackage{graphicx}
 ---
 
-Hallo, das ist ein Test. Tschüss.
-
 ```{r setup, include=FALSE, cache=F, message=F, warning=F, results="hide"}
 knitr::opts_chunk$set(
   cache = FALSE, echo = FALSE, message = FALSE, warning = FALSE
@@ -41,7 +39,7 @@ Preston (1975, p. 235)
 ### Data
 
 ```{r tab_descriptives_sample, results="asis"}
-desc_rnames <- paste0("\\textit{", smp_def$label[7:9], "}")
+desc_rnames <- paste0("\\textit{", smp_def$label[7:10], "}")
 t <- tab_desc_stat
 rownames(t$df) <- desc_rnames
 names(t$df)[c(5,7)] <- c("25 \\%", "75 \\%")
@@ -79,17 +77,10 @@ latex_tab <- c(
 cat(paste(latex_tab, collapse = "\n"))  
 ```
 
-
 ### Life Expectancy in the World 
 
 ```{r World Map}
 fig_world
-```
-
-### Life Expectancy by National Income
-
-```{r Scatter, results="asis"}
-fig_scatter
 ```
 
 ### No presentation without correlation table...
@@ -97,29 +88,28 @@ fig_scatter
 ``` {r CorrTable, results="asis"}
 tab <- tab_corr
 lat_tab <- unlist(strsplit(tab$kable_ret, "\n"))
-lat_tab[7:9] <- str_replace(
-  lat_tab[7:9], fixed(smp_def$var_name[8:10]), smp_def$label[8:10]
+lat_tab[7:10] <- str_replace(
+  lat_tab[7:10], fixed(smp_def$var_name[9:12]), smp_def$label[9:12]
 )
 lat_tab[4] <- "\\\\[-1.8ex]\\hline \\hline \\\\[-1.8ex]"
 lat_tab[6] <- "\\hline\\\\[-1.8ex]"
-lat_tab[10] <- "\\\\[-1.8ex]\\hline \\hline \\\\[-1.8ex]"
+lat_tab[11] <- "\\\\[-1.8ex]\\hline \\hline \\\\[-1.8ex]"
 latex_tab <- c(
   "\\begin{center}",
-  "\\begin{tabular}{lccc}",
-  lat_tab[4:10],
+  "\\begin{tabular}{lcccc}",
+  lat_tab[4:11],
   "\\end{tabular}",
   "\\end{center}"
 )
 cat(paste(latex_tab, collapse = "\n"))
 ```
 
-
 ### ... and regression table for all countries
 
 ``` {r RegTable, results="asis"}
 tab <- tab_regression$table
 tab[12] <- paste(
-  "\\\\[-1.8ex] & \\multicolumn{4}{c}{", smp_def$label[9], "} \\\\"
+  "\\\\[-1.8ex] & \\multicolumn{5}{c}{", smp_def$label[10], "} \\\\"
 )
 esc_var_names <- str_replace_all(smp_def$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
@@ -136,7 +126,7 @@ for (i in c(15, 18)) {
 latex_tab <- c(
   "\\begin{center}",
   "\\resizebox*{!}{0.8\\textheight}{",
-  "\\begin{tabular}{lcccc}",
+  "\\begin{tabular}{lccccc}",
   tab[8:33],
   "\\end{tabular}}",
   "\\end{center}"
@@ -144,12 +134,12 @@ latex_tab <- c(
 cat(paste(latex_tab, collapse = "\n"))
 ```
 
-### ... and regression table for only above middle income
+### ... and regression table for above middle income countries
 
-``` {r RegTable_high, results="asis"}
+``` {r RegTable High, results="asis"}
 tab <- tab_regression_high$table
 tab[12] <- paste(
-  "\\\\[-1.8ex] & \\multicolumn{4}{c}{", smp_def$label[9], "} \\\\"
+  "\\\\[-1.8ex] & \\multicolumn{5}{c}{", smp_def$label[10], "} \\\\"
 )
 esc_var_names <- str_replace_all(smp_def$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
@@ -166,24 +156,18 @@ for (i in c(15, 18)) {
 latex_tab <- c(
   "\\begin{center}",
   "\\resizebox*{!}{0.8\\textheight}{",
-  "\\begin{tabular}{lcccc}",
+  "\\begin{tabular}{lccccc}",
   tab[8:33],
   "\\end{tabular}}",
   "\\end{center}"
 )
 cat(paste(latex_tab, collapse = "\n"))
 ```
-
 
 ### Conclusion
 
 - The Preston Curve is alive and well! 
 - Have fun adjusting this template to fit your research needs
 - Consider contributing to its repository and promote Open Science!
-
-
-
-
-
 
 

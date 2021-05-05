@@ -9,15 +9,16 @@ library(tidyr)
 load("data/pulled/worldbank.rda")
 
 smp <- worldbank_panel %>%
-  mutate(ln_gdp_capita = log(gdp_capita)) %>%
+  mutate(ln_gdp_capita = log(gdp_capita), 
+         ln_health_capita = log(health_exp_capita)) %>%
   drop_na()
 
 smp_def <-  bind_rows(
     worldbank_def,
     tibble(
-      var_name = "ln_gdp_capita",
-      var_def = "Natural log of gdp_capita",
-      type = "numeric"
+      var_name = c("ln_gdp_capita", "ln_health_capita"),
+      var_def = c("Natural log of gdp_capita", "Natural log of health_exp_capita"),
+      type = c("numeric","numeric")
     )
   )
 
@@ -32,9 +33,11 @@ smp_def$label <-  c(
   "World Bank Income Group",
   "Calendar Year",
   "National Income per Capita",
+  "Health Expenditures per Capita",
   "Unemployment (in \\%)",
   "Life Expectancy (in years)",
-  "ln(National Income per Capita)"
+  "ln(National Income per Capita)", 
+  "ln(Health Expenditures per Capita)"
 )
 
 save(smp, smp_def, file = "data/generated/sample.rda")
