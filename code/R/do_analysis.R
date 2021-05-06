@@ -4,7 +4,8 @@ library(ExPanDaR)
 
 load("data/generated/sample.rda")
 
-##Figure World Map
+###Figure World Map
+
 library(ggmap)
 library(maps)
 world_map <- map_data("world")
@@ -32,7 +33,7 @@ card <- card[order(card$group, card$order),]
 fig_world <- ggplot(card, aes(x=long, y=lat, group=group)) + geom_polygon(aes(fill=life_expectancy), color="black") + scale_fill_gradient("Life Expectancy",low="royalblue1", high="brown3", na.value="grey80") +
   theme_minimal() +xlab("Longitude") + ylab("Latitude")
 
-##Other figures and tables 
+###Other figures and tables 
 
 fig_scatter <- ggplot(
   smp, aes(x = ln_gdp_capita, y = life_expectancy, color = region)
