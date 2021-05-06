@@ -5,7 +5,6 @@ library(ExPanDaR)
 load("data/generated/sample.rda")
 
 ##Figure World Map
-
 library(ggmap)
 library(maps)
 world_map <- map_data("world")
