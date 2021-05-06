@@ -11,7 +11,7 @@ date: |
   | `r loc <- Sys.getlocale(category = "LC_TIME"); Sys.setlocale("LC_TIME", "C"); fdate <- format(Sys.time(), '%B %e, %Y'); Sys.setlocale("LC_TIME", loc); fdate` \vspace{1cm}
   
 abstract: |
-  | This is a paper^[\textcolor{blue}{I, Lisa Lüttke, added to the following analysis a world map showing the life expectency per country, another variable showing the health expenditures in a country and another regression table investigating only a subset of countries. Changes in the text are marked in blue.}] stub generated out of a template repository. It repliactes the association of national income per capita with life expectancy that has become known as the 'Preston Curve'. 
+  | This is a paper^[\textcolor{blue}{I, Lisa Lüttke, added to the following analysis a world map showing the life expectancy per country, the variable health expenditures in a country and a regression analysis investigating only a subset of countries. Changes in the text are marked in blue.}] stub generated out of a template repository. It repliactes the association of national income per capita with life expectancy that has become known as the 'Preston Curve'. 
   | \vspace{8cm}
 
 bibliography: references.bib
@@ -75,14 +75,14 @@ include_graphics("../media/preston_1975_p235.png")
 ```
 
 While it is unclear whether the association is indicative for a causal link of national income on life expectancy, it is often referred to in public debates as one of the main arguments why economic growth is socially desirable. The analysis presented here is only meant to  demonstrate the workflow of the repository and not to contribute to the underlying 
-question of causality. \textcolor{blue}{However, the investigation will be extended to including another independent variable, in more detail the health expenditures per capita (Idea from} @dalgaard2014optimal\textcolor{blue}{).}
+question of causality. \textcolor{blue}{However, the investigation will be extended by including the independent variable the health expenditures per capita (Idea from} @dalgaard2014optimal\textcolor{blue}{).}
 
 The data for the analysis has been collected from the Open Data repository of the World Bank (https://data.worldbank.org). \textcolor{blue}{For the graphical representation of the world in Figure \ref{fig:worldmap}, the package of}  @KW2013  \textcolor{blue}{was used.}  The sample is limited to country-year observations that have non-missing values for all variables and I use the natural logarithm of GDP per capita as my measure for national income per capita to account for the underlying growth process that shapes national income. The descriptive statistics of the data are presented in Table \ref{tab:descriptives}.
 
-Table \ref{tab:corr} reports the correlations between dependent and independent variables. \textcolor{blue}{It can be seen that the strongest correlation exists between the logarithms of GDP and health expenditures. Therefore, both variables should be not included in the same regression model due to multicollinearity issues.} As expected, \textcolor{blue}{the correlation table} features a strong positive correlation between national income and life expectancy.  Figure \ref{fig:scatter} visualizes this association.
+Table \ref{tab:corr} reports the correlations between dependent and independent variables. \textcolor{blue}{It can be seen that the strongest correlation exists between the natural logarithms of GDP and health expenditures. Therefore, both variables should be not included in the same regression model due to multicollinearity.} As expected, \textcolor{blue}{the correlation table} features a strong positive correlation between national income and life expectancy.  Figure \ref{fig:scatter} visualizes this association.
 
 
-To verify that this association is robust to including controls and general cross-sectional as well as time variance, I estimate the respective coefficient for GDP per capita in a multiple  regression framework. Using a level-log multiple regression setup, Table \ref{tab:reg} yields a set of model estimates. As you can see, the association between national income and life expectancy is significant at conventional levels across all specifications. The magnitude of the association, however, is significantly reduced once one controls for unobserved cross-sectional variation by including country fixed effects. \textcolor{blue}{The regression three in \ref{tab:reg} provides evidence that including the natural logarithm of health expenditure per capita increases the} $R^2$.
+To verify that this association is robust to including controls and general cross-sectional as well as time variance, I estimate the respective coefficient for GDP per capita in a multiple  regression framework. Using a level-log multiple regression setup, Table \ref{tab:reg} yields a set of model estimates. As you can see, the association between national income and life expectancy is significant at conventional levels across all specifications. The magnitude of the association, however, is significantly reduced once one controls for unobserved cross-sectional variation by including country fixed effects. \textcolor{blue}{The regression three in Table \ref{tab:reg} provides evidence that including the natural logarithm of health expenditure per capita increases the} $R^2$.
 
 \textcolor{blue}{To test whether these associations are robust, I undertake an robustness check by only regressing the associations on a subsample of countries above the middle income (see Regression Table \ref{tab:reg_high}). It can be seen that the} $R^2$ \textcolor{blue}{decreases, however, the direction and the significance are very similar.} 
 
@@ -128,7 +128,7 @@ latex_tab <- c(
   "\\setlength{\\labelsep}{0pt}",
   "\\footnotetext",
   sprintf(
-    "\\item Note: The data is obtained from the World Bank. The sample covers %d countries and the period %d to %d. \\textit{National Income per captia} values are in constant 2010 thousand U.S. dollars. \\textit{Health expenditures per captia} are in current US. dollars", length(unique(smp$country)),
+    "\\item Note: The data is obtained from the World Bank. The sample covers %d countries and the period %d to %d. \\textit{National Income per captia} values are in constant 2010 thousand U.S. dollars. \\textit{Health expenditures per capita} are in current US. dollars", length(unique(smp$country)),
     min(as.numeric(as.character(smp$year))), 
     max(as.numeric(as.character(smp$year)))
   ),
