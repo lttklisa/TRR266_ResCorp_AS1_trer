@@ -169,10 +169,10 @@ tab[12] <- paste(
 )
 esc_var_names <- str_replace_all(smp_def$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
-  var_name = esc_var_names[c(10, 8)],
-  label = smp_def$label[c(10, 8)]
+  var_name = esc_var_names[c(11,12,9)],
+  label = smp_def$label[c(11,12,9)]
 )
-for (i in c(15, 18)) {
+for (i in c(15,18,21)) {
   pos <- (i-12)/3
   tab[i] <- str_replace(
     tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
@@ -197,10 +197,10 @@ tab[12] <- paste(
 )
 esc_var_names <- str_replace_all(smp_def$var_name, fixed ("_"), "\\_")
 reg_names <- tibble(
-  var_name = esc_var_names[c(10, 8)],
-  label = smp_def$label[c(10, 8)]
+  var_name = esc_var_names[c(11,12, 9)],
+  label = smp_def$label[c(11,12, 9)]
 )
-for (i in c(15, 18)) {
+for (i in c(15,18,21)) {
   pos <- (i-12)/3
   tab[i] <- str_replace(
     tab[i], fixed(reg_names$var_name[pos]), reg_names$label[pos]
