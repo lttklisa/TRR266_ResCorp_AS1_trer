@@ -48,10 +48,10 @@ install_package_if_missing("kableExtra")
 install_package_if_missing("rmarkdown")
 
 
-#############################'''NEW#######################################
+#############################NEW#######################################
 install_package_if_missing("ggmap")
 install_package_if_missing("maps")
-#############################'''NEW#######################################
+#############################NEW#######################################
 
 # In addition, if you have no working LaTeX environment, consider
 # installing the neat tinytex LateX distribution. It is lightweight and
