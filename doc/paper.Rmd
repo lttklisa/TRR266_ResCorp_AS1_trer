@@ -75,7 +75,7 @@ include_graphics("../media/preston_1975_p235.png")
 ```
 
 While it is unclear whether the association is indicative for a causal link of national income on life expectancy, it is often referred to in public debates as one of the main arguments why economic growth is socially desirable. The analysis presented here is only meant to  demonstrate the workflow of the repository and not to contribute to the underlying 
-question of causality. \textcolor{blue}{However, the investigation will be extended by including the independent variable the health expenditures per capita (Idea from} @dalgaard2014optimal\textcolor{blue}{).}
+question of causality. \textcolor{blue}{However, the investigation will be extended by including health expenditures per capita as another independent variable (Idea from} @dalgaard2014optimal\textcolor{blue}{).}
 
 The data for the analysis has been collected from the Open Data repository of the World Bank (https://data.worldbank.org). \textcolor{blue}{For the graphical representation of the world in Figure \ref{fig:worldmap}, the package of}  @KW2013  \textcolor{blue}{was used.}  The sample is limited to country-year observations that have non-missing values for all variables and I use the natural logarithm of GDP per capita as my measure for national income per capita to account for the underlying growth process that shapes national income. The descriptive statistics of the data are presented in Table \ref{tab:descriptives}.
 
