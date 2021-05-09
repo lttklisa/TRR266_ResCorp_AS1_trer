@@ -11,7 +11,7 @@ date: |
   | `r loc <- Sys.getlocale(category = "LC_TIME"); Sys.setlocale("LC_TIME", "C"); fdate <- format(Sys.time(), '%B %e, %Y'); Sys.setlocale("LC_TIME", loc); fdate` \vspace{1cm}
   
 abstract: |
-  | This is a paper^[\textcolor{blue}{I, Lisa Lüttke, added to the following analysis a world map showing the life expectancy per country, the variable health expenditures in a country and a regression analysis investigating only a subset of countries. As a consequence of that, some references were added to the investigation. Changes in the text are marked in blue.}] stub generated out of a template repository. It repliactes the association of national income per capita with life expectancy that has become known as the 'Preston Curve'. 
+  | This is a paper^[\textcolor{blue}{I added to the following analysis a world map showing the life expectancy per country, the variable health expenditures in a country and a regression analysis investigating only a subset of countries. As a consequence of that, some references were added to the investigation. Changes in the text are marked in blue.}] stub generated out of a template repository. It repliactes the association of national income per capita with life expectancy that has become known as the 'Preston Curve'. 
   | \vspace{8cm}
 
 bibliography: references.bib
